@@ -86,7 +86,7 @@ public class UILibraries extends GlobalVariables {
 	{
 		try 
 		{
-			WebDriverWait ww=new WebDriverWait(getDriver(), 20);
+			WebDriverWait ww=new WebDriverWait(getDriver(), 50);
 			//ww.until(ExpectedConditions.presenceOfAllElementsLocatedBy(xpathValue));
 			ww.until(ExpectedConditions.visibilityOfElementLocated(xpathValue));
 			WebElement ele=getDriver().findElement(xpathValue);
