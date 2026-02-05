@@ -63,8 +63,9 @@ public class OrangeHRTests extends GlobalVariables{
 		try {
 			AppBusinessFunctions.Login();
 			AppBusinessFunctions.accessMenuByText("Admin");
-			AppBusinessFunctions.addUserToEmployee();
-            
+			//AppBusinessFunctions.addUserToEmployee();
+			AppBusinessFunctions.verifyUserByUserName("TesterNK01");
+           
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

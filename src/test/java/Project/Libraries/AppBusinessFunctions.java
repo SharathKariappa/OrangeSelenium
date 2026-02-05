@@ -1,5 +1,8 @@
 package Project.Libraries;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.testng.Assert;
 
 import Project.Pages.AdminUserManagement;
@@ -132,7 +135,7 @@ public class AppBusinessFunctions extends GlobalVariables{
 			UILibraries.ClickElement(AdminUserManagement.addButton);
 			UILibraries.ClickElement(AdminUserManagement.userRole);
 			UILibraries.ClickElement(AdminUserManagement.UserRoleByText("ESS"));
-			UILibraries.EnterText(AdminUserManagement.employeeName, "Smith");
+			UILibraries.EnterText(AdminUserManagement.employeeName, "Joy");
 			UILibraries.ClickElement(AdminUserManagement.userNameElement);
 			UILibraries.ClickElement(AdminUserManagement.status);
 			UILibraries.ClickElement(AdminUserManagement.statusElementByText("Disabled"));
@@ -162,18 +165,25 @@ public class AppBusinessFunctions extends GlobalVariables{
 
 
 	/***************************************************************************
-	 * Method Name : addUserToEmployee()
+	 * Method Name : verifyUserByUserName(String userName)
 	 * Created By  : Sharath
 	 * Reviewed By : 
-	 * Purpose	   : Create user for Employee
+	 * Purpose	   : Search user by user name and verify if user exists
 	 ****************************************************************************/
-	public static void deleteUserbyUserName(String userName)
+	public static void verifyUserByUserName(String userName)
 	{
+		List<List<String>> tableData=new ArrayList<>();
 		try {
 
-			UILibraries.EnterText(AdminUserManagement.userName, "TesterNK01");
-			// UILibraries.ClickElement(AdminUserManagement.se)
-
+			UILibraries.EnterText(AdminUserManagement.userName, userName);
+			UILibraries.ClickElement(AdminUserManagement.searchUser);
+			tableData=UILibraries.GetDataFromTable(AdminUserManagement.rowsUserTable, AdminUserManagement.columnsUserTable);
+		   	for(List<String> row :tableData)
+		   	{
+		   		System.out.println(row.get(1) +"----"+row.get(2));
+		   		
+		   	}
+             System.out.println("Done");
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -1,5 +1,8 @@
 package Project.Libraries;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -124,5 +127,36 @@ public class UILibraries extends GlobalVariables {
 		return str;
 	}
 	
- 
+	
+	/***************************************************************************
+	 * Method Name : Method to read data from table row-wise
+	 * Created By  :  Sharath
+	 * Reviewed By : 
+	 * Purpose	   : 
+	 ****************************************************************************
+	 */
+
+	public static List<List<String>> GetDataFromTable(By rowXpath,By columnXpath)
+	{
+		List<List<String>> tableData = new ArrayList<>();
+		try {
+			WebDriverWait wd = new WebDriverWait(getDriver(), 10);
+			wd.until(ExpectedConditions.presenceOfAllElementsLocatedBy(rowXpath));
+			List<WebElement> rows = getDriver().findElements(rowXpath);
+			for(WebElement row :rows)
+			{
+				List<WebElement> colums=row.findElements(columnXpath);
+				List<String>rowData=new ArrayList<String>();
+				for(WebElement col : colums)
+				{
+					rowData.add(col.getText());
+				}
+				tableData.add(rowData);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return tableData;
+	}
 }

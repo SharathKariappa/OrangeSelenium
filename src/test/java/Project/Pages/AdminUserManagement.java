@@ -21,7 +21,14 @@ public class AdminUserManagement {
     public static By SucessWindow=By.xpath("//div[@id='oxd-toaster_1']");
     public static By SucessMessage=By.xpath("//div[@id='oxd-toaster_1']//child::p[text()='Success']");
     
+    
+    
     public static By searchUser=By.xpath("//button[text()=' Search ']");
+    public static By resetButton=By.xpath("//button[text()=' Reset ']");
+    public static By rowsUserTable=By.xpath("//div[@class='oxd-table-card']");
+    public static By columnsUserTable=By.xpath("//div[@class='oxd-table-cell oxd-padding-cell']");
+    
+    
     
     public static By UserRoleByText(String role)
     {
@@ -32,5 +39,7 @@ public class AdminUserManagement {
     {
     	return(By.xpath("//*[@role='listbox']//*[text()='"+Status+"']"));
     }
+    
+    
 
 }
