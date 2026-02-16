@@ -2,24 +2,24 @@
 <testng-results ignored="2" total="3" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-01-22T18:55:15 IST" name="Default suite" finished-at="2026-01-22T18:55:44 IST" duration-ms="29122">
+  <suite started-at="2026-02-12T18:50:54 IST" name="Default suite" finished-at="2026-02-12T18:52:39 IST" duration-ms="105432">
     <groups>
     </groups>
-    <test started-at="2026-01-22T18:55:15 IST" name="Default test" finished-at="2026-01-22T18:55:44 IST" duration-ms="29122">
+    <test started-at="2026-02-12T18:50:54 IST" name="Default test" finished-at="2026-02-12T18:52:39 IST" duration-ms="105432">
       <class name="Project.Tests.OrangeHRTests">
-        <test-method is-config="true" signature="startBrowser()[pri:0, instance:Project.Tests.OrangeHRTests@a9cd3b1]" started-at="2026-01-22T18:55:15 IST" name="startBrowser" finished-at="2026-01-22T18:55:34 IST" duration-ms="19056" status="PASS">
+        <test-method is-config="true" signature="startBrowser()[pri:0, instance:Project.Tests.OrangeHRTests@55b7a4e0]" started-at="2026-02-12T18:50:54 IST" name="startBrowser" finished-at="2026-02-12T18:51:00 IST" duration-ms="5765" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- startBrowser -->
-        <test-method signature="LoginTest()[pri:0, instance:Project.Tests.OrangeHRTests@a9cd3b1]" started-at="2026-01-22T18:55:34 IST" name="LoginTest" finished-at="2026-01-22T18:55:42 IST" duration-ms="8606" status="PASS">
+        <test-method signature="AddUser()[pri:0, instance:Project.Tests.OrangeHRTests@55b7a4e0]" started-at="2026-02-12T18:51:00 IST" name="AddUser" finished-at="2026-02-12T18:52:39 IST" duration-ms="99468" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- LoginTest -->
-        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Project.Tests.OrangeHRTests@a9cd3b1]" started-at="2026-01-22T18:55:42 IST" name="CloseBrowser" finished-at="2026-01-22T18:55:44 IST" duration-ms="1323" status="PASS">
+        </test-method> <!-- AddUser -->
+        <test-method is-config="true" signature="CloseBrowser()[pri:0, instance:Project.Tests.OrangeHRTests@55b7a4e0]" started-at="2026-02-12T18:52:39 IST" name="CloseBrowser" finished-at="2026-02-12T18:52:39 IST" duration-ms="165" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- CloseBrowser -->
-        <test-method is-config="true" signature="Cleanup()[pri:0, instance:Project.Tests.OrangeHRTests@a9cd3b1]" started-at="2026-01-22T18:55:44 IST" name="Cleanup" finished-at="2026-01-22T18:55:44 IST" duration-ms="32" status="PASS">
+        <test-method is-config="true" signature="Cleanup()[pri:0, instance:Project.Tests.OrangeHRTests@55b7a4e0]" started-at="2026-02-12T18:52:39 IST" name="Cleanup" finished-at="2026-02-12T18:52:39 IST" duration-ms="9" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Cleanup -->

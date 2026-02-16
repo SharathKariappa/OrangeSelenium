@@ -1,7 +1,12 @@
 package Project.Libraries;
 
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -120,7 +125,8 @@ public class UILibraries extends GlobalVariables {
 	public static String GetTextFromElement(By xpathValue)
 	{
 		String str="";
-		WebDriverWait wd=new WebDriverWait(getDriver(), 10);
+	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		WebDriverWait wd=new WebDriverWait(getDriver(),50);
 		wd.until(ExpectedConditions.presenceOfAllElementsLocatedBy(xpathValue));
 		WebElement ele=getDriver().findElement(xpathValue);
 		str=ele.getText();
@@ -129,10 +135,10 @@ public class UILibraries extends GlobalVariables {
 	
 	
 	/***************************************************************************
-	 * Method Name : Method to read data from table row-wise
+	 * Method Name : List<List<String>> GetDataFromTable(By rowXpath,By columnXpath)
 	 * Created By  :  Sharath
 	 * Reviewed By : 
-	 * Purpose	   : 
+	 * Purpose	   : Method to read data from table row-wise using List<List<String>>
 	 ****************************************************************************
 	 */
 
@@ -147,6 +153,7 @@ public class UILibraries extends GlobalVariables {
 			{
 				List<WebElement> colums=row.findElements(columnXpath);
 				List<String>rowData=new ArrayList<String>();
+				
 				for(WebElement col : colums)
 				{
 					rowData.add(col.getText());
@@ -157,6 +164,59 @@ public class UILibraries extends GlobalVariables {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return tableData;
+	}
+	
+	
+	
+	/***************************************************************************
+	 * Method Name : List<Map<String,String>> GetDataFromTable(By rowXpath,By columnXpath)
+	 * Created By  :  Sharath
+	 * Reviewed By : 
+	 * Purpose	   : Method to read data from table row-wise using List<Map<String,String>>
+	 ****************************************************************************
+	 */
+	
+	public static List<Map<String,String>> GetdataFromTableUsingMaps(By rowXpath,By columnXpath,By headerXPath)
+	{
+		List<Map<String, String>>tableData=new ArrayList<Map<String,String>>();
+		try 
+		{
+			WebDriverWait wd=new WebDriverWait(getDriver(), 20);
+			wd.until(ExpectedConditions.presenceOfElementLocated(headerXPath));
+			List<WebElement>headers=new ArrayList<WebElement>();
+			List<String>headerNames=new ArrayList<String>();		
+			
+			headers=getDriver().findElements(headerXPath);
+			for(WebElement header:headers)
+			{
+				headerNames.add(header.getText());
+			}
+			
+			
+			
+			
+			List<WebElement>rows=getDriver().findElements(rowXpath);
+			for(WebElement row : rows)
+			{
+				
+				List<WebElement>colums=row.findElements(columnXpath);
+				Map<String,String>rowData=new LinkedHashMap<String, String>();
+				
+				for(int i=0;i<colums.size();i++)
+				{
+					rowData.put(headerNames.get(i), colums.get(i).getText());
+					
+				}
+				
+			tableData.add(rowData);	
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		return tableData;
 	}
 }
