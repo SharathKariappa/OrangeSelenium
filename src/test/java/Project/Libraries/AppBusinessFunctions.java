@@ -1,7 +1,10 @@
 package Project.Libraries;
 
+import static org.testng.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.testng.Assert;
 
@@ -135,7 +138,7 @@ public class AppBusinessFunctions extends GlobalVariables{
 			UILibraries.ClickElement(AdminUserManagement.addButton);
 			UILibraries.ClickElement(AdminUserManagement.userRole);
 			UILibraries.ClickElement(AdminUserManagement.UserRoleByText("ESS"));
-			UILibraries.EnterText(AdminUserManagement.employeeName, "Joy");
+			UILibraries.EnterText(AdminUserManagement.employeeName, "john");
 			UILibraries.ClickElement(AdminUserManagement.userNameElement);
 			UILibraries.ClickElement(AdminUserManagement.status);
 			UILibraries.ClickElement(AdminUserManagement.statusElementByText("Disabled"));
@@ -172,18 +175,54 @@ public class AppBusinessFunctions extends GlobalVariables{
 	 ****************************************************************************/
 	public static void verifyUserByUserName(String userName)
 	{
-		List<List<String>> tableData=new ArrayList<>();
+		//List<List<String>> tableData=new ArrayList<>();--used when using List<List<String>> to get data from table
+		List<Map<String,String>>tableData=new ArrayList<Map<String,String>>();
 		try {
-
+            Boolean flag=false;
 			UILibraries.EnterText(AdminUserManagement.userName, userName);
 			UILibraries.ClickElement(AdminUserManagement.searchUser);
-			tableData=UILibraries.GetDataFromTable(AdminUserManagement.rowsUserTable, AdminUserManagement.columnsUserTable);
-		   	for(List<String> row :tableData)
-		   	{
-		   		System.out.println(row.get(1) +"----"+row.get(2));
-		   		
-		   	}
-             System.out.println("Done");
+			//tableData=UILibraries.GetDataFromTable(AdminUserManagement.rowsUserTable, AdminUserManagement.columnsUserTable);--used when using List<List<String>> to get data from table
+			tableData=UILibraries.GetdataFromTableUsingMaps(AdminUserManagement.rowsUserTable, AdminUserManagement.columnsUserTable,AdminUserManagement.tableHeader);
+			System.out.println("Number of rows found: "+tableData.size());
+			
+			for(Map<String, String> row : tableData)
+			{
+				if(row.get("Username").equals(userName))
+				{
+					flag=true;
+					break;
+				}
+				
+			}
+			if(!flag)
+			{
+				Assert.fail("User Not Found");
+			}
+			else
+			{
+				System.out.println(userName +": User Found");
+			}
+			
+			
+//			--used when using List<List<String>> to get data from table
+			//		   	for(List<String> row :tableData)
+//		   	{
+//		   		if(userName.equals(row.get(1)))
+//		   		{
+//		   			flag=true;
+//		   			break;
+//		   		}
+//		   			   		
+//		   	}
+//		   	if (!flag) 
+//		   	{
+//				Assert.fail(userName+" -Not Found");
+//			}
+//		   	else
+//		   	{
+//		   		System.out.println(userName+" : User found ");
+//		   	}
+		   	
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

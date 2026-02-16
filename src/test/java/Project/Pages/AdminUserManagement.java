@@ -7,7 +7,7 @@ public class AdminUserManagement {
 	public static By addButton=By.xpath("//button[text()=' Add ']");
 	public static By userName=By.xpath("//label[text()='Username']/parent::div//following-sibling::div//child::input [@class='oxd-input oxd-input--active']");
 	//public static By userNameElement=By.xpath("//*[@role='listbox']//*[text()='Joy  Smith']");
-	public static By userNameElement=By.xpath("(//*[@role='listbox']//*[contains(text(),'Joy')])[1]");
+	public static By userNameElement=By.xpath("(//*[@role='listbox']//*[contains(text(),'John')])[1]");
 	public static By userRole=By.xpath("//label[text()='User Role']/parent::div//following-sibling::div//child::div[@class='oxd-select-text-input']");
 	//public static By userRoleElement=By.xpath("//*[text()='Admin' and not(@class='oxd-text oxd-text--span oxd-main-menu-item--name') and not(@class='oxd-text oxd-text--h6 oxd-topbar-header-breadcrumb-module')]");
 	//public static By userRoleElement=By.xpath("//*[text()='ESS']");
@@ -26,8 +26,8 @@ public class AdminUserManagement {
     public static By searchUser=By.xpath("//button[text()=' Search ']");
     public static By resetButton=By.xpath("//button[text()=' Reset ']");
     public static By rowsUserTable=By.xpath("//div[@class='oxd-table-card']");
-    public static By columnsUserTable=By.xpath("//div[@class='oxd-table-cell oxd-padding-cell']");
-    
+    public static By columnsUserTable=By.xpath(".//div[@class='oxd-table-cell oxd-padding-cell']");
+    public static By tableHeader=By.xpath("//div[@class='oxd-table-header-cell oxd-padding-cell oxd-table-th']");
     
     
     public static By UserRoleByText(String role)
