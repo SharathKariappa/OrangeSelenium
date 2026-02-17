@@ -57,8 +57,9 @@ public class OrangeHRTests extends GlobalVariables{
 
 	}
 
+	
 	@Test
-	public svtatic void AddUser()
+	public static void AddUser()
 	{
 		try {
 			AppBusinessFunctions.Login();
@@ -75,6 +76,28 @@ public class OrangeHRTests extends GlobalVariables{
 
 
 
+	}
+	
+	
+	/***************************************************************************
+	 * Method Name : CreatePostAndVerify()
+	 * Created By  : Sharath 
+	 * Reviewed By : 
+	 * Purpose	   : Create Post and Verify the post created in the feed
+	 ****************************************************************************
+	 */
+	@Test
+	public static void CreatePostAndVerify()
+	{
+		try {
+			AppBusinessFunctions.Login();
+		//	AppBusinessFunctions.CreatePost("This is my first post");
+		
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 
