@@ -82,17 +82,19 @@ public class OrangeHRTests extends GlobalVariables{
 	/***************************************************************************
 	 * Method Name : CreatePostAndVerify()
 	 * Created By  : Sharath 
-	 * Reviewed By : Added Review comments
+	 * Reviewed By : Added Review comments-updated
 	 * Purpose	   : Create Post and Verify the post created in the feed
 	 ****************************************************************************
 	 */
 	@Test
 	public static void CreatePostAndVerify()
 	{
+		String timeStamp="";
+		String postData="This is my first post";
 		try {
 			AppBusinessFunctions.Login();
-		//	AppBusinessFunctions.CreatePost("This is my first post");
-		
+			timeStamp = AppBusinessFunctions.CreateBuzzPost(postData);
+			AppBusinessFunctions.VerifyBuzzPostByTimeStamp(timeStamp,postData);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -100,6 +102,8 @@ public class OrangeHRTests extends GlobalVariables{
 		}
 	}
 
+	
+	
 
 	@AfterMethod
 	public static void CloseBrowser()

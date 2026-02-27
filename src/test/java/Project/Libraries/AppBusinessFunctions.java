@@ -6,11 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 
 import Project.Pages.AdminUserManagement;
+import Project.Pages.BuzzPage;
 import Project.Pages.HomePage;
 import Project.Pages.LoginPage;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class AppBusinessFunctions extends GlobalVariables{
 
@@ -44,7 +49,7 @@ public class AppBusinessFunctions extends GlobalVariables{
 		}
 	}
 
-//	create method for add 2 number 
+
 
 	/***************************************************************************
 	 * Method Name : VerifyMandatoryCheckForUsername()()
@@ -122,6 +127,30 @@ public class AppBusinessFunctions extends GlobalVariables{
 
 	}
 
+	
+	/***************************************************************************
+	 * Method Name : accessAdditionalMenuByXpath(By menuXpath) 
+	 * Created By  : Sharath
+	 * Reviewed By : 
+	 * Purpose	   : Select menu based on the  xpath passed as argument-menuXpath and verify the page header with strMenu passed as argument
+	 ****************************************************************************
+	 */
+	public static void accessAdditionalMenuByXpath(By menuXpath, String strMenu)
+	{
+		try 
+		{
+			
+			UILibraries.ClickElement(menuXpath);
+			Assert.assertEquals(UILibraries.GetTextFromElement(HomePage.pageHeader), strMenu);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	
+     
+	
 
 	/***************************************************************************
 	 * Method Name : addUserToEmployee()
@@ -229,5 +258,92 @@ public class AppBusinessFunctions extends GlobalVariables{
 			e.printStackTrace();
 		}
 	}
+
+	
+	
+	/***************************************************************************
+	 * Method Name : CreateBuzzPost(String Post)
+	 * Created By  : Sharath
+	 * Reviewed By : 
+	 * Purpose	   : Create a buzz post and verify if it is successfully created
+	 ****************************************************************************/
+
+public static String CreateBuzzPost(String Post)
+{
+    try 
+    {
+        AppBusinessFunctions.accessAdditionalMenuByXpath(HomePage.buzzMenuItem, "Buzz");
+        UILibraries.WaitForLoadSpinnerToDisappear(BuzzPage.feedloadSpinnerdiv);
+        UILibraries.EnterText(BuzzPage.postTextArea, Post);
+        UILibraries.ClickElement(BuzzPage.postButton);
+
+        // capture timestamp right after clicking the post button
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-dd-MM hh:mm a");
+        String timestamp = now.format(fmt);
+
+        if(UILibraries.IsDisplayed(BuzzPage.SucessWindow))
+        {
+            Assert.assertEquals(UILibraries.GetTextFromElement(BuzzPage.successMessage), "Success", "Post Not Created");
+        }
+        else
+        {
+            Assert.fail("Success message not displayed");
+        }
+
+        return timestamp;
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        return null;
+    }
+}
+
+
+/***************************************************************************
+ * Method Name : VerifyBuzzPostByTimeStamp(String timeStamp)	
+ * Created By  : Sharath
+ * Reviewed By : 
+ * Purpose	   : Verify if a buzz post is successfully created by timestamp
+ ****************************************************************************/
+
+public static void VerifyBuzzPostByTimeStamp(String timeStamp,String actPostData)
+{
+	List<Map<String,String>>tableData=new ArrayList<Map<String,String>>();
+	Boolean flag=false;
+	try 
+	{
+		AppBusinessFunctions.accessAdditionalMenuByXpath(HomePage.buzzMenuItem, "Buzz");
+		System.out.println("Buzz page opened to verify");
+		tableData=UILibraries.getDataFromBuzzFeed();
+		for(Map<String,String> row:tableData)
+		{
+			if (row.get("Post Time").equals(timeStamp.toUpperCase()))
+			{
+				Assert.assertEquals(row.get("Post Data"), actPostData,"Incorrect Post Data at "+timeStamp);
+				flag=true;
+				
+			}
+			
+		}
+		
+		if(!flag)
+		{
+			Assert.fail("No Post Found in :"+timeStamp);
+		}
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	
+
+}
+
+
+
+
+
+
+
 
 }
