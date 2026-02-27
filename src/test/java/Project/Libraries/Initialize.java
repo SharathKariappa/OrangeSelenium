@@ -58,7 +58,7 @@ public class Initialize extends GlobalVariables {
 	public static void NavigateToURL() {
 		try {
 			getDriver().get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-			getDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+			getDriver().manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

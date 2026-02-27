@@ -9,9 +9,12 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import Project.Pages.BuzzPage;
 
 public class UILibraries extends GlobalVariables {
 	
@@ -106,6 +109,7 @@ public class UILibraries extends GlobalVariables {
 			{
 				return false;
 			}
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -125,7 +129,7 @@ public class UILibraries extends GlobalVariables {
 	public static String GetTextFromElement(By xpathValue)
 	{
 		String str="";
-	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	    getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		WebDriverWait wd=new WebDriverWait(getDriver(),50);
 		wd.until(ExpectedConditions.presenceOfAllElementsLocatedBy(xpathValue));
 		WebElement ele=getDriver().findElement(xpathValue);
@@ -219,4 +223,85 @@ public class UILibraries extends GlobalVariables {
 		
 		return tableData;
 	}
+	
+	
+	
+	
+
+/***************************************************************************
+ * Method Name : List<Map<String,String>> getDataFromBuzzFeed()
+ * Created By  : Sharath
+ * Reviewed By : 
+ * Purpose	   : get data from buzz feed and return List<Map<String,String>>
+ ****************************************************************************/
+public static List<Map<String,String>> getDataFromBuzzFeed()
+{
+	List<Map<String,String>> tabledata=new ArrayList<Map<String,String>>();
+	try 
+	{   
+		System.out.println("Starting to get data from feed");
+		WebDriverWait wd=new WebDriverWait(getDriver(), 25);
+		wd.until(ExpectedConditions.presenceOfAllElementsLocatedBy(BuzzPage.buzzPostsfeedDiv));
+		List<WebElement> rows=getDriver().findElements(BuzzPage.buzzPostsfeedDiv);
+		System.out.println("Number of posts : "+rows.size());
+		for(WebElement row:rows)
+		{
+			//add try catch post data
+				Map<String,String>rowData=new LinkedHashMap<String, String>();
+				String postTime=row.findElement(BuzzPage.postTimeP).getText();
+				String postEmpname = row.findElement(BuzzPage.postedNameP).getText();;
+				String postData="";
+				try {
+					
+					postData=row.findElement(BuzzPage.postDataP).getText();
+				    } 
+				catch (NoSuchElementException e) 
+				    {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("Using alternate locator to get employee name since : "+e.getMessage());
+					postEmpname = row.findElement(BuzzPage.postDataPTruncate).getText();
+				    }
+				rowData.put("Employee Name", postEmpname);
+				rowData.put("Post Time", postTime);
+				rowData.put("Post Data", postData);
+				tabledata.add(rowData);
+			
+//			catch (NoSuchElementException e) 
+//			{
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//				System.out.println("Skipping current row since : "+e.getMessage());
+//			
+//			}			
+		}
+
+		
+	} catch (Exception e) {
+		// TODO: handle exception
+		e.printStackTrace();
+	}
+	return tabledata;
+}
+
+
+/***************************************************************************
+ * Method Name : Void WaitForLoadSpinnerToDisappear(By spinnerXpath)
+ * Created By  : Sharath
+ * Reviewed By : 
+ * Purpose	   : Wait for the load spinner to disappear
+ ****************************************************************************/
+public static void WaitForLoadSpinnerToDisappear(By spinnerXpath)
+{
+	
+	try 
+	{
+		WebDriverWait wd=new WebDriverWait(getDriver(), 20);
+		wd.until(ExpectedConditions.invisibilityOfElementLocated(spinnerXpath));
+		
+	} catch (Exception e) {
+		// TODO: handle exception
+		e.printStackTrace();
+	}
+}
 }
