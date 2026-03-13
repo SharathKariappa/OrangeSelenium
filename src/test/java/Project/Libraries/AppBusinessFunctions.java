@@ -9,6 +9,7 @@ import java.util.Map;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 
+import Project.DataReaders.ConfigReader;
 import Project.Pages.AdminUserManagement;
 import Project.Pages.BuzzPage;
 import Project.Pages.HomePage;
@@ -30,8 +31,10 @@ public class AppBusinessFunctions extends GlobalVariables{
 	public static void Login()
 	{
 		try {
-			UILibraries.EnterText(LoginPage.inputUsername, "Admin");
-			UILibraries.EnterText(LoginPage.inputPassword, "admin123");
+//			UILibraries.EnterText(LoginPage.inputUsername, "Admin");
+//			UILibraries.EnterText(LoginPage.inputPassword, "admin123");
+			UILibraries.EnterText(LoginPage.inputUsername,ConfigReader.getProperty("Username"));
+			UILibraries.EnterText(LoginPage.inputPassword, ConfigReader.getProperty("Password"));
 			UILibraries.ClickElement(LoginPage.buttonLogin);
 			
 			if(UILibraries.IsDisplayed(HomePage.divSearchBar))

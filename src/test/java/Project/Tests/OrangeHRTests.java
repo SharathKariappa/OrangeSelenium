@@ -64,7 +64,7 @@ public class OrangeHRTests extends GlobalVariables{
 		try {
 			AppBusinessFunctions.Login();
 			AppBusinessFunctions.accessMenuByText("Admin");
-		//	AppBusinessFunctions.addUserToEmployee();
+		    AppBusinessFunctions.addUserToEmployee();
 			AppBusinessFunctions.verifyUserByUserName("TesterNK01");
 			
          
@@ -97,7 +97,7 @@ public class OrangeHRTests extends GlobalVariables{
 			AppBusinessFunctions.VerifyBuzzPostByTimeStamp(timeStamp,postData);
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block 
 			e.printStackTrace();
 		}
 	}
