@@ -51,7 +51,37 @@ public class AppBusinessFunctions extends GlobalVariables{
 			e.printStackTrace();
 		}
 	}
+	
+	
+	/***************************************************************************
+	 * Method Name : UserLogin()
+	 * Created By  : Sharath
+	 * Reviewed By : Updated-2
+	 * Purpose	   : peform login with user credentials passed as arguments
+	 ****************************************************************************/
 
+	public static void UserLogin(String username,String password)
+	{
+		try {
+			UILibraries.EnterText(LoginPage.inputUsername, username);
+			UILibraries.EnterText(LoginPage.inputPassword, password);
+			UILibraries.ClickElement(LoginPage.buttonLogin);
+			
+			if(UILibraries.IsDisplayed(HomePage.divSearchBar))
+			{
+              Assert.assertTrue(true);
+			}
+			else
+			{
+				Assert.fail("Login Failed !!! Homepage not displayed");
+			}
+
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 
 	/***************************************************************************
