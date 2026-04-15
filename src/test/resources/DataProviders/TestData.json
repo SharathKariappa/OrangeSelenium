@@ -1,0 +1,12 @@
+{
+  "LoginDataPossitveScenario": [
+    { "username": "Admin", "password": "admin123" }
+  ],
+  "LoginDataNegativeScenario": [
+      { "username": "Admin1", "password": "admin123" },
+      { "username": "user2", "password": "pass2" }
+    ],
+  "checkoutData": [
+    { "product": "Laptop", "price": "1200" }
+  ]
+}

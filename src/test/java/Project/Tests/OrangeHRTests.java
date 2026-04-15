@@ -1,13 +1,17 @@
 package Project.Tests;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import Project.DataReaders.JsonReader;
+import Project.Entity.LoginData;
 import Project.Libraries.AppBusinessFunctions;
 import Project.Libraries.GlobalVariables;
 import Project.Libraries.Initialize;
@@ -32,13 +36,44 @@ public class OrangeHRTests extends GlobalVariables{
 	}
 
 
+@DataProvider(name="LoginDataPossitveScenario")
+public static Object[][] getLoginData() throws Exception
+{
+	List<LoginData> list=JsonReader.getSpecificdata("LoginDataPossitveScenario",LoginData.class);
+	if (list == null || list.isEmpty()) {
+        // Return empty dataset so TestNG will skip the parameterized test instead of failing with NPE
+        return new Object[0][0];
+    }
+	
+	Object[][] data=new Object[list.size()][1];
+	for(int i=0;i<list.size();i++)
+	{
+		data[i][0]=list.get(i);
+	}
+	return data;
+}
 
+
+
+	@Test(dataProvider="LoginDataPossitveScenario")
+	public static void LoginTestWithData(LoginData loginData)
+	{
+		if (loginData == null) 
+		{
+            throw new IllegalArgumentException("LoginData row is null");
+        }
+		AppBusinessFunctions.UserLogin(loginData.getUsername(), loginData.getPassword());
+		
+
+	}
+	
+	
+	
 	@Test
 	public static void LoginTest()
 	{
 		AppBusinessFunctions.Login();
         
-
 
 	}
 
