@@ -67,7 +67,10 @@ public static Object[][] getLoginData() throws Exception
 
 	}
 	
-	
+	public static void testPrint()
+	{
+		System.out.println("Test Print");
+	}	
 	
 	@Test
 	public static void LoginTest()
